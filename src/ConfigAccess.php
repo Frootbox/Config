@@ -81,6 +81,17 @@ class ConfigAccess implements \Iterator {
 
         reset($this->data);
     }
+    
+    
+    /**
+     * 
+     */
+    public function append ( $new ): ConfigAccess {
+        
+        $this->data = array_replace_recursive($this->data, $new);
+        
+        return $this;
+    }
 
 
     /**

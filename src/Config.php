@@ -47,6 +47,17 @@ class Config implements Interfaces\Base {
     
     
     /**
+     * Append config data
+     */
+    public function append ( $data ): Config {
+        
+        $this->configuration->append($data);
+        
+        return $this;
+    }
+    
+    
+    /**
      * 
      */
     public function clearCaches ( ): Config {
@@ -94,5 +105,13 @@ class Config implements Interfaces\Base {
         }
         
         $this->configuration = new ConfigAccess(require $filepath);
+    }
+    
+    
+    /**
+     * Prepend data to configuration
+     */
+    public function prepend ( ) {
+        
     }
 }
