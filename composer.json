@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": ">=5.5",
-        "Frootbox/Exceptions": "*"
+        "Frootbox/Exceptions": "0.0.4"
     },
     "autoload": {
     	"psr-4": { "Frootbox\\Config\\": "src/" }
