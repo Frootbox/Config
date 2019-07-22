@@ -93,8 +93,8 @@ class Config implements Interfaces\Base {
 
         return $config;
     }
-    
-    
+
+
     /**
      * 
      */

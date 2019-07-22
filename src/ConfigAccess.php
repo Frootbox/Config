@@ -50,6 +50,15 @@ class ConfigAccess implements \Iterator {
     /**
      *
      */
+    public function getData ( ) {
+
+        return $this->data;
+    }
+
+
+    /**
+     *
+     */
     public function key ( ) {
 
         return key($this->data);
