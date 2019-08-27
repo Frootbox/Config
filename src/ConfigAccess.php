@@ -95,8 +95,9 @@ class ConfigAccess implements \Iterator {
     /**
      * 
      */
-    public function append ( $new ): ConfigAccess {
-        
+    public function append ( array $new ): ConfigAccess {
+
+
         $this->data = array_replace_recursive($this->data, $new);
         
         return $this;

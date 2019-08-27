@@ -26,6 +26,9 @@ class Config implements Interfaces\Base {
         if (!empty($file)) {
             $this->load($file);            
         }
+        else {
+            $this->configuration = new ConfigAccess([]);
+        }
 
         if ($includes = $this->get('includes')) {
 
@@ -49,7 +52,7 @@ class Config implements Interfaces\Base {
     /**
      * Append config data
      */
-    public function append ( $data ): Config {
+    public function append ( array $data ): Config {
         
         $this->configuration->append($data);
         
