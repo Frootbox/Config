@@ -11,8 +11,8 @@ namespace Frootbox\Config;
 /**
  * 
  */
-class Config implements Interfaces\Base {
-    
+class Config implements Interfaces\Base
+{
     /**
      * 
      */
@@ -58,18 +58,15 @@ class Config implements Interfaces\Base {
         
         return $this;
     }
-    
-    
+
     /**
      * 
      */
-    public function clearCaches ( ): Config {
-        
+    public function clearCaches(): void
+    {
         // d($this->get('cacheRootFolder'));
-        
-        return $this;
+
     }
-    
     
     /**
      * 

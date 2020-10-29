@@ -8,24 +8,23 @@ namespace Frootbox\Config;
 /**
  * 
  */
-class ConfigAccess implements \Iterator {
-    
+class ConfigAccess implements \Iterator
+{
     protected $data;
 
     /**
      * 
      */
-    public function __construct ( array $data ) {
-        
+    public function __construct(array $data)
+    {
         $this->data = $data;
     }
-    
-    
+
     /**
      * 
      */
-    public function __get ( $attribute ) {
-        
+    public function __get($attribute)
+    {
         if (!array_key_exists($attribute, $this->data)) {
             return null;
         }
@@ -35,6 +34,14 @@ class ConfigAccess implements \Iterator {
         }
         
         return $this->data[$attribute];
+    }
+
+    /**
+     *
+     */
+    public function __isset($attribute): bool
+    {
+        return array_key_exists($attribute, $this->data);
     }
 
 
