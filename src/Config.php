@@ -60,6 +60,14 @@ class Config implements Interfaces\Base
     }
 
     /**
+     * Unset config data
+     */
+    public function unset($key): void
+    {
+        $this->configuration->unset($key);
+    }
+
+    /**
      * 
      */
     public function clearCaches(): void
