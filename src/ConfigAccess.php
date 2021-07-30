@@ -8,7 +8,7 @@ namespace Frootbox\Config;
 /**
  * 
  */
-class ConfigAccess implements \Iterator
+class ConfigAccess implements \Iterator, \ArrayAccess
 {
     protected $data;
 
@@ -80,6 +80,41 @@ class ConfigAccess implements \Iterator
         next($this->data);
     }
 
+    /**
+     *
+     */
+    public function offsetExists($offset)
+    {
+        return array_key_exists($offset, $this->data);
+    }
+
+    /**
+     *
+     */
+    public function offsetGet($offset)
+    {
+        if (!array_key_exists($offset, $this->data)) {
+            return null;
+        }
+
+        return $this->data[$offset];
+    }
+
+    /**
+     *
+     */
+    public function offsetSet($offset, $value)
+    {
+        d($this);
+    }
+
+    /**
+     *
+     */
+    public function offsetUnset($offset)
+    {
+        d($this);
+    }
 
     /**
      *
@@ -121,5 +156,13 @@ class ConfigAccess implements \Iterator
         $this->data = array_replace_recursive($this->data, $new);
 
         return $this;
+    }
+
+    /**
+     *
+     */
+    public function unset ($key) {
+
+        unset($this->data[$key]);
     }
 }
