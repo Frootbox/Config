@@ -8,7 +8,7 @@ namespace Frootbox\Config;
 /**
  * 
  */
-class ConfigAccess implements \Iterator
+class ConfigAccess implements \Iterator, \ArrayAccess
 {
     protected $data;
 
@@ -48,8 +48,8 @@ class ConfigAccess implements \Iterator
     /**
      *
      */
-    public function current ( ) {
-
+    public function current(): mixed
+    {
         return current($this->data);
     }
 
@@ -66,7 +66,8 @@ class ConfigAccess implements \Iterator
     /**
      *
      */
-    public function key ( ) {
+    public function key(): mixed
+    {
 
         return key($this->data);
     }
@@ -75,29 +76,62 @@ class ConfigAccess implements \Iterator
     /**
      *
      */
-    public function next ( ) {
-
+    public function next(): void
+    {
         next($this->data);
     }
 
+    /**
+     *
+     */
+    public function offsetExists(mixed $offset): bool
+    {
+        return array_key_exists($offset, $this->data);
+    }
 
     /**
      *
      */
-    public function valid ( ) {
+    public function offsetGet($offset): mixed
+    {
+        if (!array_key_exists($offset, $this->data)) {
+            return null;
+        }
 
+        return $this->data[$offset];
+    }
+
+    /**
+     *
+     */
+    public function offsetSet(mixed $offset, mixed $value): void
+    {
+        d($this);
+    }
+
+    /**
+     *
+     */
+    public function offsetUnset(mixed $offset): void
+    {
+        d($this);
+    }
+
+    /**
+     *
+     */
+    public function valid(): bool
+    {
         return isset($this->data[key($this->data)]);
     }
 
-
     /**
      *
      */
-    public function rewind ( ) {
-
+    public function rewind(): void
+    {
         reset($this->data);
     }
-    
     
     /**
      * 
@@ -110,7 +144,6 @@ class ConfigAccess implements \Iterator
         return $this;
     }
 
-
     /**
      *
      */
@@ -121,5 +154,13 @@ class ConfigAccess implements \Iterator
         $this->data = array_replace_recursive($this->data, $new);
 
         return $this;
+    }
+
+    /**
+     *
+     */
+    public function unset ($key) {
+
+        unset($this->data[$key]);
     }
 }
