@@ -100,6 +100,41 @@ class ConfigAccess implements \Iterator, \ArrayAccess
 
         return $this->data[$offset];
     }
+    /**
+     *
+     */
+    public function offsetExists($offset)
+    {
+        return array_key_exists($offset, $this->data);
+    }
+
+    /**
+     *
+     */
+    public function offsetGet($offset)
+    {
+        if (!array_key_exists($offset, $this->data)) {
+            return null;
+        }
+
+        return $this->data[$offset];
+    }
+
+    /**
+     *
+     */
+    public function offsetSet($offset, $value)
+    {
+        d($this);
+    }
+
+    /**
+     *
+     */
+    public function offsetUnset($offset)
+    {
+        d($this);
+    }
 
     /**
      *
