@@ -13,16 +13,13 @@ namespace Frootbox\Config;
  */
 class Config implements Interfaces\Base
 {
-    /**
-     * 
-     */
-    protected $configuration;
+    protected ConfigAccess $configuration;
 
     /**
      * @Inject({"config.file"})
      */
-    public function __construct ( $file ) {
-
+    public function __construct(string $file = null)
+    {
         if (!empty($file)) {
             $this->load($file);            
         }
@@ -39,24 +36,21 @@ class Config implements Interfaces\Base
         }
     }
 
-    
     /**
-     * 
+     * @param string $attribute
+     * @return mixed
      */
-    public function __get ( $attribute ) {
-
+    public function __get(string $attribute ): mixed
+    {
         return $this->configuration->$attribute;
     }
-    
-    
+
     /**
      * Append config data
      */
-    public function append ( array $data ): Config {
-        
+    public function append(array $data): void
+    {
         $this->configuration->append($data);
-        
-        return $this;
     }
 
     /**
@@ -73,14 +67,14 @@ class Config implements Interfaces\Base
     public function clearCaches(): void
     {
         // d($this->get('cacheRootFolder'));
-
     }
-    
-    /**
-     * 
-     */
-    public function get ( $configpath ) {
 
+    /**
+     * @param string $configpath
+     * @return mixed
+     */
+    public function get(string $configpath): mixed
+    {
         $request = explode('.', $configpath);
         
         $config = $this->configuration;
@@ -102,24 +96,23 @@ class Config implements Interfaces\Base
         return $config;
     }
 
-
     /**
      * 
      */
-    public function load ( $filepath ) {
-        
+    public function load(string $filepath): void
+    {
         if (!file_exists($filepath)) {
             throw new \Frootbox\Exceptions\ResourceMissing('Config file not loadable.');
         }
         
         $this->configuration = new ConfigAccess(require $filepath);
     }
-    
-    
+
     /**
      * Prepend data to configuration
      */
-    public function prepend ( ) {
+    public function prepend()
+    {
         
     }
 }

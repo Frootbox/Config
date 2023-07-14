@@ -10,7 +10,7 @@ namespace Frootbox\Config;
  */
 class ConfigAccess implements \Iterator, \ArrayAccess
 {
-    protected $data;
+    protected array $data;
 
     /**
      * 
@@ -21,9 +21,10 @@ class ConfigAccess implements \Iterator, \ArrayAccess
     }
 
     /**
-     * 
+     * @param string $attribute
+     * @return mixed
      */
-    public function __get($attribute)
+    public function __get(string $attribute): mixed
     {
         if (!array_key_exists($attribute, $this->data)) {
             return null;
@@ -37,44 +38,40 @@ class ConfigAccess implements \Iterator, \ArrayAccess
     }
 
     /**
-     *
+     * @param string $attribute
+     * @return bool
      */
-    public function __isset($attribute): bool
+    public function __isset(string $attribute): bool
     {
         return array_key_exists($attribute, $this->data);
     }
 
-
     /**
-     *
+     * @return mixed
      */
     public function current(): mixed
     {
         return current($this->data);
     }
 
-
     /**
-     *
+     * @return array
      */
-    public function getData ( ) {
-
+    public function getData(): array
+    {
         return $this->data;
     }
 
-
     /**
-     *
+     * @return mixed
      */
     public function key(): mixed
     {
-
         return key($this->data);
     }
 
-
     /**
-     *
+     * @return void
      */
     public function next(): void
     {
@@ -82,7 +79,8 @@ class ConfigAccess implements \Iterator, \ArrayAccess
     }
 
     /**
-     *
+     * @param mixed $offset
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -90,7 +88,8 @@ class ConfigAccess implements \Iterator, \ArrayAccess
     }
 
     /**
-     *
+     * @param $offset
+     * @return mixed
      */
     public function offsetGet($offset): mixed
     {
@@ -102,7 +101,9 @@ class ConfigAccess implements \Iterator, \ArrayAccess
     }
 
     /**
-     *
+     * @param mixed $offset
+     * @param mixed $value
+     * @return void
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
@@ -110,7 +111,8 @@ class ConfigAccess implements \Iterator, \ArrayAccess
     }
 
     /**
-     *
+     * @param mixed $offset
+     * @return void
      */
     public function offsetUnset(mixed $offset): void
     {
@@ -118,7 +120,7 @@ class ConfigAccess implements \Iterator, \ArrayAccess
     }
 
     /**
-     *
+     * @return bool
      */
     public function valid(): bool
     {
@@ -126,29 +128,30 @@ class ConfigAccess implements \Iterator, \ArrayAccess
     }
 
     /**
-     *
+     * @return void
      */
     public function rewind(): void
     {
         reset($this->data);
     }
-    
+
     /**
-     * 
+     * @param array $new
+     * @return $this
      */
-    public function append ( array $new ): ConfigAccess {
-
-
+    public function append(array $new): ConfigAccess
+    {
         $this->data = array_replace_recursive($this->data, $new);
         
         return $this;
     }
 
     /**
-     *
+     * @param string $filename
+     * @return $this
      */
-    public function appendFile ( string $filename ): ConfigAccess {
-
+    public function appendFile(string $filename): ConfigAccess
+    {
         $new = require $filename;
 
         $this->data = array_replace_recursive($this->data, $new);
@@ -157,10 +160,11 @@ class ConfigAccess implements \Iterator, \ArrayAccess
     }
 
     /**
-     *
+     * @param $key
+     * @return void
      */
-    public function unset ($key) {
-
+    public function unset($key): void
+    {
         unset($this->data[$key]);
     }
 }
