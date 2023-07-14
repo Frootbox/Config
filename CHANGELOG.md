@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - improved type hinting
 
+### Changed
+
+- Renamed changelog to CHANGELOG.md
+
 ## 0.0.5
 
 ### Added
