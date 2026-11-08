@@ -18,7 +18,7 @@ class Config implements Interfaces\Base
     /**
      * @Inject({"config.file"})
      */
-    public function __construct(string $file = null)
+    public function __construct(?string $file = null)
     {
         if (!empty($file)) {
             $this->load($file);            
